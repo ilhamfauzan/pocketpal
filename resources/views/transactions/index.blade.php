@@ -123,27 +123,35 @@
                         <form action="{{ route('transactions.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="type" value="transfer">
-                            <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">From Wallet</label>
-                                <select name="wallet_id" required
-                                    class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
-                                    @foreach ($wallets as $wallet)
-                                        <option value="{{ $wallet->id }}">{{ $wallet->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">To Wallet</label>
-                                <select name="to_wallet_id" required
-                                    class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
-                                    @foreach ($wallets as $wallet)
-                                        <option value="{{ $wallet->id }}">{{ $wallet->name }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="mb-4 flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+                                <div class="flex-1">
+                                    <label class="block font-medium text-gray-200 mb-2">From Wallet</label>
+                                    <select name="wallet_id" required
+                                        class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
+                                        @foreach ($wallets as $wallet)
+                                            <option value="{{ $wallet->id }}">{{ $wallet->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="flex items-center justify-center my-4 sm:my-0">
+                                    <svg class="w-6 h-6 text-gray-200 transform sm:rotate-0 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <label class="block font-medium text-gray-200 mb-2">To Wallet</label>
+                                    <select name="to_wallet_id" required
+                                        class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
+                                        @foreach ($wallets as $wallet)
+                                            <option value="{{ $wallet->id }}">{{ $wallet->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="mb-4">
                                 <label class="block font-medium text-gray-200 mb-2">Date</label>
-                                <input type="date" name="tx_date" id="date" required
+                                <input type="date" name="tx_date" id="tf-date" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">
@@ -220,13 +228,10 @@
                 firstTab.style.transform = 'translateX(0)';
             }
 
-            const dateInput = document.getElementById('date');
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.value = today;
-
-            const dateInputEx = document.getElementById('expense-date');
-            const todayEx = new Date().toISOString().split('T')[0];
-            dateInputEx.value = todayEx;
+            ['date', 'expense-date', 'tf-date'].forEach(id => {
+                const dateInput = document.getElementById(id);
+                dateInput.value = new Date().toISOString().split('T')[0];
+            });
 
             // Show notifications with animation
             document.querySelectorAll('.notification').forEach(notification => {
