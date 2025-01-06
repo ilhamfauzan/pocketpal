@@ -11,22 +11,28 @@
             </div>
 
             <!-- Wallets Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-4">
-                @foreach ($wallets as $wallet)
-                    <div onclick="window.location='{{ route('wallets.show', $wallet) }}'"
-                        class="border border-gray-700 shadow-xl rounded-lg cursor-pointer hover:bg-opacity-80 transition-all duration-200"
-                        style="background-color: {{ $wallet->color_hex }};" data-color="{{ $wallet->color_hex }}">
-                        <div class="p-4 sm:p-6 flex flex-col justify-end h-full w-full aspect-square">
-                            <div class="text-content">
-                                <p class="text-4xl sm:text-6xl mb-2 sm:mb-4">{{ $wallet->emoji }}</p>
-                                <!-- Tampilkan emoji -->
-                                <h3 class="text-lg sm:text-xl font-semibold">{{ $wallet->name }}</h3>
-                                <p class="text-sm sm:text-base">Rp{{ number_format($wallet->balance, 2) }}</p>
+            @if ($wallets->isEmpty())
+                <div class="mt-10 ml-4 text-white/70 text-xl">
+                    You have no wallets. Click "Add New Wallet" to create one.
+                </div>
+            @else
+                <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-4">
+                    @foreach ($wallets as $wallet)
+                        <div onclick="window.location='{{ route('wallets.show', $wallet) }}'"
+                            class="border border-gray-700 shadow-xl rounded-lg cursor-pointer hover:bg-opacity-80 transition-all duration-200"
+                            style="background-color: {{ $wallet->color_hex }};" data-color="{{ $wallet->color_hex }}">
+                            <div class="p-4 sm:p-6 flex flex-col justify-end h-full w-full aspect-square">
+                                <div class="text-content">
+                                    <p class="text-4xl sm:text-6xl mb-2 sm:mb-4">{{ $wallet->emoji }}</p>
+                                    <!-- Tampilkan emoji -->
+                                    <h3 class="text-lg sm:text-xl font-semibold">{{ $wallet->name }}</h3>
+                                    <p class="text-sm sm:text-base">Rp{{ number_format($wallet->balance, 2) }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
+            @endif
 
             @if (session('success'))
                 <div class="absolute top-0 left-1/2 transform -translate-x-1/2 mt-4 bg-green-500 text-white p-4 rounded-lg shadow-lg notification opacity-0 transition-opacity duration-500">

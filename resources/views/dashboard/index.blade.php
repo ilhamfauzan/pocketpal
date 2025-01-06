@@ -107,10 +107,19 @@
                     <p class="text-s font-semibold text-white/50 mb-5">this month</p>
                     <canvas id="transactionsChart" class="w-full" height="300"></canvas>
                 </div>
+                @if ($wallets->isEmpty())
                 <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
                     <h3 class="text-lg font-semibold text-white mb-4">Wallet Distribution</h3>
-                    <canvas id="walletsChart" class="w-full" height="300"></canvas>
-                </div>
+                    <div class="flex justify-center items-center h-full" height="300">
+                        <p class="text-white text-center">No wallet data available</p>
+                    </div>
+                    </div>
+                @else
+                    <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold text-white mb-4">Wallet Distribution</h3>
+                        <canvas id="walletsChart" class="w-full" height="300"></canvas>
+                    </div>
+                @endif
                 <div class="col-span-2 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 overflow-hidden">
                     <div class="p-6 border-b border-gray-700">
                         <h3 class="text-lg font-semibold text-white">Recent Transactions</h3>
@@ -177,8 +186,8 @@
                     datasets: [{
                         label: 'amount',
                         data: [
-                            {{ $transactionsThisMonth->where('type', 'income')->sum('amount') }},
-                            {{ $transactionsThisMonth->where('type', 'expense')->sum('amount') }}
+                            {{ $transactionsThisMonth->where('user_id', auth()->id())->where('type', 'income')->sum('amount') }},
+                            {{ $transactionsThisMonth->where('user_id', auth()->id())->where('type', 'expense')->sum('amount') }}
                         ],
                         backgroundColor: [
                             'rgba(75, 192, 192, 0.2)',
@@ -207,44 +216,47 @@
 
             // Data for Wallet Distribution Chart
             const walletsCtx = document.getElementById('walletsChart').getContext('2d');
-            const walletsChart = new Chart(walletsCtx, {
-                type: 'pie',
-                data: {
-                    labels: {!! json_encode($wallets->pluck('name')) !!},
-                    datasets: [{
-                        label: 'Wallet Distribution',
-                        data: {!! json_encode($wallets->pluck('balance')) !!},
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return tooltipItem.label + ': ' + tooltipItem.raw;
+            const walletData = {!! json_encode($wallets->pluck('balance')) !!};
+            if (walletData.length > 0) {
+                const walletsChart = new Chart(walletsCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: {!! json_encode($wallets->pluck('name')) !!},
+                        datasets: [{
+                            label: 'Wallet Distribution',
+                            data: walletData,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw;
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            });
+                });
+            }
         });
     </script>
 </x-app-layout>
