@@ -1,7 +1,7 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700">
+    <div class="flex items-center justify-center min-h-screen py-12 relative">
+        <div class="max-w-2xl w-full sm:px-6 lg:px-8">
+            <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 mx-auto">
                 <div class="p-6">
                     <h1 class="text-2xl font-bold mb-6 text-center text-white">Tambah Transaksi</h1>
 
@@ -167,6 +167,18 @@
                 </div>
             </div>
         </div>
+
+        @if (session('success'))
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 mt-4 bg-green-500 text-white p-4 rounded-lg shadow-lg notification opacity-0 transition-opacity duration-500">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 mt-4 bg-red-500 text-white p-4 rounded-lg shadow-lg notification opacity-0 transition-opacity duration-500">
+                {{ session('error') }}
+            </div>
+        @endif
     </div>
 
     <script>
@@ -215,6 +227,21 @@
             const dateInputEx = document.getElementById('expense-date');
             const todayEx = new Date().toISOString().split('T')[0];
             dateInputEx.value = todayEx;
+
+            // Show notifications with animation
+            document.querySelectorAll('.notification').forEach(notification => {
+                notification.classList.add('opacity-100');
+            });
+
+            // Hide notifications after 3 seconds
+            setTimeout(() => {
+                document.querySelectorAll('.notification').forEach(notification => {
+                    notification.classList.remove('opacity-100');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 500);
+                });
+            }, 3000);
         });
     </script>
 
@@ -227,6 +254,10 @@
         .tab-content:not(.hidden) {
             opacity: 1;
             transform: translateX(0);
+        }
+
+        .notification.opacity-100 {
+            opacity: 1;
         }
     </style>
 
