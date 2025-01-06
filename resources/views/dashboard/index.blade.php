@@ -136,7 +136,7 @@
                             </tr>
                         </thead>
                         <tbody class="divide-white/10 divide-y divide-gray-700">
-                            @foreach ($transactions as $transaction)
+                            @foreach ($transactions->sortByDesc('created_at') as $transaction)
                                 <tr class="hover:bg-gray-700/50 transition-colors">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                         {{ $transaction->created_at->format('M d, Y') }}

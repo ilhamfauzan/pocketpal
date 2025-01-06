@@ -48,7 +48,7 @@
                             </div>
                             <div class="mb-4">
                                 <label class="block font-medium text-gray-200 mb-2">Tanggal</label>
-                                <input type="date" name="date" id="date" required
+                                <input type="date" name="tx_date" id="date" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">
@@ -86,7 +86,7 @@
                             </div>
                             <div class="mb-4">
                                 <label class="block font-medium text-gray-200 mb-2">Tanggal</label>
-                                <input type="date" name="date" id="expense-date" required
+                                <input type="date" name="tx_date" id="expense-date" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">
@@ -143,7 +143,7 @@
                             </div>
                             <div class="mb-4">
                                 <label class="block font-medium text-gray-200 mb-2">Tanggal</label>
-                                <input type="date" name="date" id="date" required
+                                <input type="date" name="tx_date" id="date" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">

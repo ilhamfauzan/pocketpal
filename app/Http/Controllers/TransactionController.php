@@ -32,15 +32,18 @@ class TransactionController extends Controller
             'to_wallet_id' => 'required_if:type,transfer|exists:wallets,id|different:wallet_id',
             'category_id' => 'nullable|exists:categories,id',
             'description' => 'nullable|string|max:255',
-            'date' => 'required|date',
+            'tx_date' => 'required|date',
         ]);
 
         try {
             DB::beginTransaction();
 
-            // Konversi tanggal ke format yang sesuai
-            $transactionDate = Carbon::parse($request->date)->startOfDay();
+            $transactionDate1 = Carbon::parse($request->tx_date)->startOfDay();
+            $transactionDate = $request->tx_date;
             $validated['user_id'] = Auth::id();
+
+            // dd($transactionDate1 . ' ' . $transactionDate);
+
 
             switch ($request->type) {
                 case 'income': // Tambah Saldo
@@ -54,8 +57,7 @@ class TransactionController extends Controller
                         'wallet_id' => $wallet->id,
                         'category_id' => $request->category_id,
                         'description' => $request->description,
-                        'created_at' => $transactionDate,
-                        'updated_at' => $transactionDate,
+                        'tx_date' => $transactionDate,
                         'user_id' => $validated['user_id'],
                     ]);
                     break;
@@ -76,8 +78,7 @@ class TransactionController extends Controller
                         'wallet_id' => $wallet->id,
                         'category_id' => $request->category_id,
                         'description' => $request->description,
-                        'created_at' => $transactionDate,
-                        'updated_at' => $transactionDate,
+                        'tx_date' => $transactionDate,
                         'user_id' => $validated['user_id'],
                     ]);
                     break;
@@ -103,8 +104,7 @@ class TransactionController extends Controller
                         'wallet_id' => $fromWallet->id,
                         'category_id' => $request->category_id,
                         'description' => 'Transfer ke ' . $toWallet->name,
-                        'created_at' => $transactionDate,
-                        'updated_at' => $transactionDate,
+                        'tx_date' => $transactionDate,
                         'user_id' => $validated['user_id'],
                     ]);
 
@@ -115,8 +115,7 @@ class TransactionController extends Controller
                         'wallet_id' => $toWallet->id,
                         'category_id' => $request->category_id,
                         'description' => 'Transfer dari ' . $fromWallet->name,
-                        'created_at' => $transactionDate,
-                        'updated_at' => $transactionDate,
+                        'tx_date' => $transactionDate,
                         'user_id' => $validated['user_id'],
                     ]);
                     break;
