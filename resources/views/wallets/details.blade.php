@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="py-12">
+    <div class="py-12 m-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Back Button -->
             <div class="mb-4">
@@ -34,7 +34,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="p-4 bg-gray-800/50 rounded-lg">
                             <p class="text-gray-400">Current Balance</p>
-                            <p class="text-3xl font-bold text-white">${{ number_format($wallet->balance, 2) }}</p>
+                            <p class="text-3xl font-bold text-white">Rp{{ number_format($wallet->balance, 2) }}</p>
                         </div>
                         <div class="p-4 bg-gray-800/50 rounded-lg">
                             <p class="text-gray-400">Created On</p>
@@ -76,7 +76,7 @@
                                                 </td>
                                                 <td class="px-6 py-4 text-gray-200">{{ $transaction->description }}</td>
                                                 <td class="px-6 py-4 text-gray-200">
-                                                    ${{ number_format($transaction->amount, 2) }}</td>
+                                                    Rp{{ number_format($transaction->amount, 2) }}</td>
                                                 <td class="px-6 py-4">
                                                     <span
                                                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full

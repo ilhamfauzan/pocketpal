@@ -14,7 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            DefaultCategoriesSeeder::class,
+            TemplateSeeder::class,
         ]);
+        // $this->call([
+        //     DefaultCategoriesSeeder::class,
+        // ]);
     }
 }
