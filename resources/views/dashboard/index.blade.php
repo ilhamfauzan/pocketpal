@@ -101,7 +101,7 @@
             </div>
 
             {{-- Charts Section --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
                     <h3 class="text-lg font-semibold text-white mb-4">Income vs Expenses</h3>
                     <canvas id="transactionsChart" class="w-full" height="300"></canvas>
@@ -110,10 +110,105 @@
                     <h3 class="text-lg font-semibold text-white mb-4">Wallet Distribution</h3>
                     <canvas id="walletsChart" class="w-full" height="300"></canvas>
                 </div>
+                <div class="col-span-2 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 overflow-hidden">
+                    <div class="p-6 border-b border-gray-700">
+                        <h3 class="text-lg font-semibold text-white">Recent Transactions</h3>
+                    </div>
+                    {{-- table --}}
+                    <div class="overflow-x-auto" style="max-height: 300px; overflow-y: auto;">
+                        <table class="min-w-full divide-y divide-white/10">
+                            <thead class="bg-[#343a44] sticky top-0">
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                        Date</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                        Description</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                        Amount</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                        Type</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                @foreach ($transactions->sortByDesc('created_at') as $transaction)
+                                    <tr class="hover:bg-gray-700/50 transition-colors">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                            {{ $transaction->created_at->format('M d, Y') }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-300">
+                                            {!! $transaction->description ?: '<i>No description</i>' !!}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 text-sm font-medium
+                                            {{ $transaction->type === 'income' ? 'text-emerald-400' : 'text-rose-400' }}">
+                                            ${{ number_format($transaction->amount, 2) }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                                                {{ $transaction->type === 'income' ? 'bg-emerald-900/50 text-emerald-200' : 'bg-rose-900/50 text-rose-200' }}">
+                                                {{ ucfirst($transaction->type) }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    {{-- <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-white/10">
+                            <thead class="divide-white/10" class="position: sticky; z-1">
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                        Date</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                        Description</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                        Amount</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                        Type</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-white/10 divide-y divide-gray-700" style="max-height: 300px; display: block; overflow-y: auto; scrollbar-width: none;">
+                                @foreach ($transactions->sortByDesc('created_at') as $transaction)
+                                    <tr class="hover:bg-gray-700/50 transition-colors">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                            {{ $transaction->created_at->format('M d, Y') }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-300">
+                                            {{ $transaction->description }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 text-sm font-medium
+                                            {{ $transaction->type === 'income' ? 'text-emerald-400' : 'text-rose-400' }}">
+                                            ${{ number_format($transaction->amount, 2) }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                                                {{ $transaction->type === 'income' ? 'bg-emerald-900/50 text-emerald-200' : 'bg-rose-900/50 text-rose-200' }}">
+                                                {{ ucfirst($transaction->type) }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div> --}}
+                </div>
             </div>
 
             {{-- Recent Transactions --}}
-            <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 overflow-hidden">
+            {{-- <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 overflow-hidden">
                 <div class="p-6 border-b border-gray-700">
                     <h3 class="text-lg font-semibold text-white">Recent Transactions</h3>
                 </div>
@@ -161,7 +256,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 
