@@ -3,7 +3,7 @@
         <div class="max-w-2xl w-full sm:px-6 lg:px-8">
             <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 mx-auto">
                 <div class="p-6">
-                    <h1 class="text-2xl font-bold mb-6 text-center text-white">Tambah Transaksi</h1>
+                    <h1 class="text-2xl font-bold mb-6 text-center text-white">Add Transaction</h1>
 
                     <!-- Tabs -->
                     <div class="flex flex-wrap justify-center space-x-0 space-y-2 sm:space-x-4 sm:space-y-0 mb-6">
@@ -13,7 +13,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
-                            Tambah Saldo
+                            Add Balance
                         </button>
                         <button id="tab-expense" onclick="showTab('expense')"
                             class="tab-button flex items-center px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-[#FCD535]/80 bg-gray-100 text-gray-700 w-full sm:w-auto">
@@ -38,7 +38,7 @@
                             @csrf
                             <input type="hidden" name="type" value="income">
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Pilih Wallet</label>
+                                <label class="block font-medium text-gray-200 mb-2">Select Wallet</label>
                                 <select name="wallet_id" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                                     @foreach ($wallets as $wallet)
@@ -47,24 +47,24 @@
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Tanggal</label>
+                                <label class="block font-medium text-gray-200 mb-2">Date</label>
                                 <input type="date" name="tx_date" id="date" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Jumlah</label>
-                                <input type="number" name="amount" step="0.01" required
+                                <label class="block font-medium text-gray-200 mb-2">Amount</label>
+                                <input type="number" name="amount" step="0.01" required placeholder="Enter amount"
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Catatan</label>
-                                <textarea name="description" rows="3"
+                                <label class="block font-medium text-gray-200 mb-2">Notes</label>
+                                <textarea name="description" rows="3" placeholder="Enter notes"
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50"></textarea>
                             </div>
                             <div class="flex justify-end">
                                 <button type="submit"
                                     class="inline-flex items-center px-4 py-2 bg-[#FCD535] border border-transparent rounded-md font-semibold text-gray-900 hover:bg-[#FCD535]/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FCD535] transition ease-in-out duration-150">
-                                    Tambah Transaksi
+                                    Add Transaction
                                 </button>
                             </div>
                         </form>
@@ -76,7 +76,7 @@
                             @csrf
                             <input type="hidden" name="type" value="expense">
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Pilih Wallet</label>
+                                <label class="block font-medium text-gray-200 mb-2">Select Wallet</label>
                                 <select name="wallet_id" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                                     @foreach ($wallets as $wallet)
@@ -85,17 +85,17 @@
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Tanggal</label>
+                                <label class="block font-medium text-gray-200 mb-2">Date</label>
                                 <input type="date" name="tx_date" id="expense-date" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Jumlah</label>
-                                <input type="number" name="amount" step="0.01" required
+                                <label class="block font-medium text-gray-200 mb-2">Amount</label>
+                                <input type="number" name="amount" step="0.01" required placeholder="Enter amount"
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Kategori Pengeluaran</label>
+                                <label class="block font-medium text-gray-200 mb-2">Expense Category</label>
                                 <select name="category_id" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                                     @foreach ($categories as $category)
@@ -104,14 +104,14 @@
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Catatan</label>
-                                <textarea name="description" rows="3"
+                                <label class="block font-medium text-gray-200 mb-2">Notes</label>
+                                <textarea name="description" rows="3" placeholder="Enter notes"
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50"></textarea>
                             </div>
                             <div class="flex justify-end">
                                 <button type="submit"
                                     class="inline-flex items-center px-4 py-2 bg-[#FCD535] border border-transparent rounded-md font-semibold text-gray-900 hover:bg-[#FCD535]/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FCD535] transition ease-in-out duration-150">
-                                    Tambah Transaksi
+                                    Add Transaction
                                 </button>
                             </div>
                         </form>
@@ -124,7 +124,7 @@
                             @csrf
                             <input type="hidden" name="type" value="transfer">
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Dari Wallet</label>
+                                <label class="block font-medium text-gray-200 mb-2">From Wallet</label>
                                 <select name="wallet_id" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                                     @foreach ($wallets as $wallet)
@@ -133,7 +133,7 @@
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Ke Wallet</label>
+                                <label class="block font-medium text-gray-200 mb-2">To Wallet</label>
                                 <select name="to_wallet_id" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                                     @foreach ($wallets as $wallet)
@@ -142,24 +142,24 @@
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Tanggal</label>
+                                <label class="block font-medium text-gray-200 mb-2">Date</label>
                                 <input type="date" name="tx_date" id="date" required
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Jumlah</label>
-                                <input type="number" name="amount" step="0.01" required
+                                <label class="block font-medium text-gray-200 mb-2">Amount</label>
+                                <input type="number" name="amount" step="0.01" required placeholder="Enter amount"
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
                             </div>
                             <div class="mb-4">
-                                <label class="block font-medium text-gray-200 mb-2">Catatan</label>
-                                <textarea name="description" rows="3"
+                                <label class="block font-medium text-gray-200 mb-2">Notes</label>
+                                <textarea name="description" rows="3" placeholder="Enter notes"
                                     class="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-gray-200 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50"></textarea>
                             </div>
                             <div class="flex justify-end">
                                 <button type="submit"
                                     class="inline-flex items-center px-4 py-2 bg-[#FCD535] border border-transparent rounded-md font-semibold text-gray-900 hover:bg-[#FCD535]/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FCD535] transition ease-in-out duration-150">
-                                    Tambah Transaksi
+                                    Add Transaction
                                 </button>
                             </div>
                         </form>

@@ -90,11 +90,13 @@
                         <div class="mb-4">
                             <label class="block text-gray-200 text-sm font-bold mb-2">Name</label>
                             <input type="text" name="name" id="categoryName" required
+                                placeholder="Enter category name"
                                 class="w-full rounded-md bg-gray-700 border-gray-600 text-gray-200 focus:border-[#FCD535] focus:ring focus:ring-[#FCD535]/50">
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-200 text-sm font-bold mb-2">Description</label>
                             <textarea name="description" id="categoryDescription"
+                                placeholder="Enter category description"
                                 class="w-full rounded-md bg-gray-700 border-gray-600 text-gray-200 focus:border-[#FCD535] focus:ring focus:ring-[#FCD535]/50"></textarea>
                         </div>
                     </div>

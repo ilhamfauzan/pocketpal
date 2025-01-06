@@ -21,7 +21,7 @@
             <x-input-label for="name" :value="__('Name')" class="text-white" />
             <x-text-input id="name" name="name" type="text"
                 class="mt-1 block w-full bg-gray-700 border-gray-600 text-gray-200 focus:border-yellow-500 focus:ring focus:ring-yellow-500/50"
-                :value="old('name', $user->name)" required autofocus autocomplete="name" />
+                :value="old('name', $user->name)" required autofocus autocomplete="name" placeholder="{{ __('Enter your name') }}" />
             <x-input-error class="mt-2 text-gray-400" :messages="$errors->get('name')" />
         </div>
 
@@ -29,7 +29,7 @@
             <x-input-label for="email" :value="__('Email')" class="text-white" />
             <x-text-input id="email" name="email" type="email"
                 class="mt-1 block w-full bg-gray-700 border-gray-600 text-gray-200 focus:border-yellow-500 focus:ring focus:ring-yellow-500/50"
-                :value="old('email', $user->email)" required autocomplete="username" />
+                :value="old('email', $user->email)" required autocomplete="username" placeholder="{{ __('Enter your email') }}" />
             <x-input-error class="mt-2 text-gray-400" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())

@@ -147,7 +147,7 @@
                             Select Emoji
                         </label>
                         <div id="emoji-picker"
-                            class="grid grid-cols-6 gap-2 bg-gray-700 p-2 rounded-md overflow-y-auto max-h-32">
+                            class="grid grid-cols-6 gap-2 bg-gray-700 p-2 rounded-md overflow-y-scroll max-h-32 scrollbar-hide">
                             <!-- Emoji list will be populated here by JavaScript -->
                         </div>
                         <input type="text" name="emoji" id="edit_emoji" value="{{ $wallet->emoji }}" required
@@ -159,7 +159,7 @@
                         </label>
                         <input type="color" name="color_hex" id="edit_color_hex" value="{{ $wallet->color_hex }}"
                             required
-                            class="w-full rounded-md bg-gray-700 border-gray-600 text-gray-200 focus:border-[#FCD535] focus:ring focus:ring-[#FCD535]/50 mt-1"
+                            class="w-full rounded-md bg-gray-700 border-gray-600 text-gray-200 focus:border-[#FCD535] focus:ring focus:ring-[#FCD535]/50 mt-1 h-10 cursor-pointer"
                             oninput="updatePreview()">
                     </div>
                     <div class="flex justify-end">
@@ -176,6 +176,16 @@
             </div>
         </div>
     </div>
+
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
 
     <script>
         function openEditModal() {
