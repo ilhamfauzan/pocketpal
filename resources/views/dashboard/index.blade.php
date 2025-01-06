@@ -101,26 +101,26 @@
             </div>
 
             {{-- Charts Section --}}
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <div class=" bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
+                <div class="lg:col-span-1 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
                     <h3 class="text-lg font-semibold text-white mb-0">Income vs Expenses</h3>
                     <p class="text-s font-semibold text-white/50 mb-5">this month</p>
                     <canvas id="transactionsChart" class="w-full" height="300"></canvas>
                 </div>
                 @if ($wallets->isEmpty())
-                <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
+                <div class="lg:col-span-1 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
                     <h3 class="text-lg font-semibold text-white mb-4">Wallet Distribution</h3>
                     <div class="flex justify-center items-center h-full" height="300">
                         <p class="text-white text-center">No wallet data available</p>
                     </div>
                     </div>
                 @else
-                    <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
+                    <div class="lg:col-span-1 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
                         <h3 class="text-lg font-semibold text-white mb-4">Wallet Distribution</h3>
                         <canvas id="walletsChart" class="w-full" height="300"></canvas>
                     </div>
                 @endif
-                <div class="col-span-2 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 overflow-hidden">
+                <div class="lg:col-span-2 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 overflow-hidden">
                     <div class="p-6 border-b border-gray-700">
                         <h3 class="text-lg font-semibold text-white">Recent Transactions</h3>
                     </div>
