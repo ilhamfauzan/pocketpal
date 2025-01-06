@@ -1,14 +1,14 @@
 <x-app-layout>
-    <div class="flex items-center justify-center min-h-screen py-12 relative">
+    <div class="flex items-center justify-center min-h-screen py-12 relative m-5">
         <div class="max-w-2xl w-full sm:px-6 lg:px-8">
             <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 mx-auto">
                 <div class="p-6">
                     <h1 class="text-2xl font-bold mb-6 text-center text-white">Tambah Transaksi</h1>
 
                     <!-- Tabs -->
-                    <div class="flex justify-center space-x-4 mb-6">
+                    <div class="flex flex-wrap justify-center space-x-0 space-y-2 sm:space-x-4 sm:space-y-0 mb-6">
                         <button id="tab-income" onclick="showTab('income')"
-                            class="tab-button active flex items-center px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-[#FCD535]/80 bg-[#FCD535] text-gray-900">
+                            class="tab-button active flex items-center px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-[#FCD535]/80 bg-[#FCD535] text-gray-900 w-full sm:w-auto">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -16,14 +16,14 @@
                             Tambah Saldo
                         </button>
                         <button id="tab-expense" onclick="showTab('expense')"
-                            class="tab-button flex items-center px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-[#FCD535]/80 bg-gray-100 text-gray-700">
+                            class="tab-button flex items-center px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-[#FCD535]/80 bg-gray-100 text-gray-700 w-full sm:w-auto">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                             </svg>
                             Expense
                         </button>
                         <button id="tab-transfer" onclick="showTab('transfer')"
-                            class="tab-button flex items-center px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-[#FCD535]/80 bg-gray-100 text-gray-700">
+                            class="tab-button flex items-center px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-[#FCD535]/80 bg-gray-100 text-gray-700 w-full sm:w-auto">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />

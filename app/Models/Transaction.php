@@ -22,6 +22,10 @@ class Transaction extends Model
         'tx_date',
     ];
 
+    protected $casts = [
+        'tx_date' => 'date',
+    ];
+
     /**
      * Relasi ke Wallet
      * Satu Transaksi dimiliki oleh satu Wallet

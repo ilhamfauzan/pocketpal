@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex items-center justify-center min-h-screen py-12 relative">
+    <div class="flex items-center justify-center min-h-screen py-12 relative m-5">
         <div class="max-w-2xl w-full sm:px-6 lg:px-8">
             <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 mx-auto">
                 <div class="p-6">

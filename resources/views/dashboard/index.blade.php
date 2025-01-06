@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="py-12">
+    <div class="flex items-center justify-center min-h-screen py-12 relative m-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-6">
                 <h2 class="text-2xl font-bold text-white">Financial Overview</h2>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="mt-4">
                         <p class="text-blue-100 text-sm">Total Balance</p>
-                        <p class="text-white text-lg font-semibold">${{ number_format($wallets->sum('balance'), 2) }}
+                        <p class="text-white text-lg font-semibold">Rp{{ number_format($wallets->sum('balance'), 2) }}
                         </p>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                         <div>
                             <p class="text-emerald-100 text-sm">Monthly Income</p>
                             <div class="flex items-baseline">
-                                <p class="text-white text-2xl font-bold">${{ number_format($incomeThisMonth, 2) }}</p>
+                                <p class="text-white text-2xl font-bold">Rp{{ number_format($incomeThisMonth, 2) }}</p>
                             </div>
                         </div>
                         <div class="p-2 bg-emerald-500/30 rounded-lg">
@@ -72,7 +72,7 @@
                         <div>
                             <p class="text-rose-100 text-sm">Monthly Expenses</p>
                             <div class="flex items-baseline">
-                                <p class="text-white text-2xl font-bold">${{ number_format($expenseThisMonth, 2) }}</p>
+                                <p class="text-white text-2xl font-bold">Rp{{ number_format($expenseThisMonth, 2) }}</p>
                             </div>
                         </div>
                         <div class="p-2 bg-rose-500/30 rounded-lg">
@@ -102,8 +102,9 @@
 
             {{-- Charts Section --}}
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
-                    <h3 class="text-lg font-semibold text-white mb-4">Income vs Expenses</h3>
+                <div class=" bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-white mb-0">Income vs Expenses</h3>
+                    <p class="text-s font-semibold text-white/50 mb-5">this month</p>
                     <canvas id="transactionsChart" class="w-full" height="300"></canvas>
                 </div>
                 <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
@@ -134,10 +135,11 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-700">
-                                @foreach ($transactions->sortByDesc('created_at') as $transaction)
+                                @foreach ($transactions->sortByDesc('tx_date') as $transaction)
                                     <tr class="hover:bg-gray-700/50 transition-colors">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                                            {{ $transaction->created_at->format('M d, Y') }}
+                                            {{-- {{ $transaction->tx_date->format('M d, Y') }} --}}
+                                            {{ \Carbon\Carbon::parse($transaction->tx_date)->format('M d, Y') }}
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-300">
                                             {!! $transaction->description ?: '<i>No description</i>' !!}
@@ -145,7 +147,7 @@
                                         <td
                                             class="px-6 py-4 text-sm font-medium
                                             {{ $transaction->type === 'income' ? 'text-emerald-400' : 'text-rose-400' }}">
-                                            ${{ number_format($transaction->amount, 2) }}
+                                            Rp{{ number_format($transaction->amount, 2) }}
                                         </td>
                                         <td class="px-6 py-4">
                                             <span
@@ -158,105 +160,9 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    
-                    {{-- <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-white/10">
-                            <thead class="divide-white/10" class="position: sticky; z-1">
-                                <tr>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                        Date</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                        Description</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                        Amount</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                        Type</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-white/10 divide-y divide-gray-700" style="max-height: 300px; display: block; overflow-y: auto; scrollbar-width: none;">
-                                @foreach ($transactions->sortByDesc('created_at') as $transaction)
-                                    <tr class="hover:bg-gray-700/50 transition-colors">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                                            {{ $transaction->created_at->format('M d, Y') }}
-                                        </td>
-                                        <td class="px-6 py-4 text-sm text-gray-300">
-                                            {{ $transaction->description }}
-                                        </td>
-                                        <td
-                                            class="px-6 py-4 text-sm font-medium
-                                            {{ $transaction->type === 'income' ? 'text-emerald-400' : 'text-rose-400' }}">
-                                            ${{ number_format($transaction->amount, 2) }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <span
-                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                                {{ $transaction->type === 'income' ? 'bg-emerald-900/50 text-emerald-200' : 'bg-rose-900/50 text-rose-200' }}">
-                                                {{ ucfirst($transaction->type) }}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div> --}}
+                    </div>  
                 </div>
             </div>
-
-            {{-- Recent Transactions --}}
-            {{-- <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 overflow-hidden">
-                <div class="p-6 border-b border-gray-700">
-                    <h3 class="text-lg font-semibold text-white">Recent Transactions</h3>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-white/10">
-                        <thead class="divide-white/10">
-                            <tr>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Date</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Description</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Amount</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Type</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-white/10 divide-y divide-gray-700">
-                            @foreach ($transactions->sortByDesc('created_at') as $transaction)
-                                <tr class="hover:bg-gray-700/50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                                        {{ $transaction->created_at->format('M d, Y') }}
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-300">
-                                        {{ $transaction->description }}
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 text-sm font-medium
-                                        {{ $transaction->type === 'income' ? 'text-emerald-400' : 'text-rose-400' }}">
-                                        ${{ number_format($transaction->amount, 2) }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                            {{ $transaction->type === 'income' ? 'bg-emerald-900/50 text-emerald-200' : 'bg-rose-900/50 text-rose-200' }}">
-                                            {{ ucfirst($transaction->type) }}
-                                        </span>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div> --}}
         </div>
     </div>
 
@@ -269,10 +175,10 @@
                 data: {
                     labels: ['Income', 'Expenses'],
                     datasets: [{
-                        label: 'Amount',
+                        label: 'amount',
                         data: [
-                            {{ $transactions->where('type', 'income')->sum('amount') }},
-                            {{ $transactions->where('type', 'expense')->sum('amount') }}
+                            {{ $transactionsThisMonth->where('type', 'income')->sum('amount') }},
+                            {{ $transactionsThisMonth->where('type', 'expense')->sum('amount') }}
                         ],
                         backgroundColor: [
                             'rgba(75, 192, 192, 0.2)',
@@ -286,6 +192,11 @@
                     }]
                 },
                 options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true
