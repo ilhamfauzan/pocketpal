@@ -4,7 +4,7 @@
             <!-- Back Button -->
             <div class="mb-4">
                 <a href="{{ route('wallets.index') }}" class="text-gray-300 hover:text-[#FCD535] transition-colors">
-                    <i class="fas fa-arrow-left"></i> Back to Wallets
+                    <i class="fas fa-arrow-left"></i> &laquo; Back to Wallets
                 </a>
             </div>
 

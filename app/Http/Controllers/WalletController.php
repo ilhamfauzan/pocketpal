@@ -40,7 +40,7 @@ class WalletController extends Controller
             'color_hex' => $request->color_hex,
         ]);
 
-        return redirect()->route('wallets.index')->with('success', 'Wallet created successfully.');
+        return redirect()->route('wallets.index')->with('success', 'Wallet added successfully!');
     }
 
     public function edit(Wallet $wallet)
@@ -70,7 +70,7 @@ class WalletController extends Controller
         // Hapus wallet
         $wallet->delete();
 
-        return redirect()->route('wallets.index')->with('success', 'Wallet deleted successfully.');
+        return redirect()->route('wallets.index')->with('delete', 'Wallet deleted successfully.');
     }
 
     public function show(Wallet $wallet)
