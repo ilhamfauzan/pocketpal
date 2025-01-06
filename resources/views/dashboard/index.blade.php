@@ -125,7 +125,12 @@
                         <h3 class="text-lg font-semibold text-white">Recent Transactions</h3>
                     </div>
                     {{-- table --}}
-                    <div class="overflow-x-auto" style="max-height: 300px; overflow-y: auto;">
+                    <div class="overflow-x-auto" style="max-height: 300px; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none;">
+                        <style>
+                            .overflow-x-auto::-webkit-scrollbar {
+                                display: none;
+                            }
+                        </style>
                         <table class="min-w-full divide-y divide-white/10">
                             <thead class="bg-[#343a44] sticky top-0">
                                 <tr>
