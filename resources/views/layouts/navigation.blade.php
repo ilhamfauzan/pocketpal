@@ -1,4 +1,3 @@
-<!-- filepath: /c:/laragon/www/login/resources/views/layouts/navigation.blade.php -->
 <div class="">
     <!-- Mobile Menu Button -->
     <div class="md:hidden flex items-center justify-between p-4 bg-gray-800">
@@ -14,7 +13,7 @@
 
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="fixed top-4 left-4 bottom-4 w-64 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-40">
+        class="fixed top-4 left-0 bottom-4 w-64 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-40">
         <div class="bg-white/10 backdrop-filter backdrop-blur-lg h-full border border-gray-700 rounded-xl shadow-xl">
             <div class="flex flex-col h-full">
                 <!-- Logo -->
