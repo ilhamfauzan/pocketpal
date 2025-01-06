@@ -19,7 +19,6 @@ Route::get('/dashboard', function () {
 
 Route::get('auth/google', [SocialiteController::class, 'googleLogin'])->name('auth.google');
 Route::get('auth/google-callback', [SocialiteController::class, 'googleAuthentication'])->name('auth.google-callback');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -34,7 +33,6 @@ Route::middleware('auth')->group(function () {
 
     // Menangani form submission (Tambah Saldo, Expense, Transfer)
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
-
 
     // Category Routes
     Route::resource('categories', CategoryController::class)->except(['create', 'edit', 'show']);

@@ -102,24 +102,24 @@
 
             {{-- Charts Section --}}
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
                     <h3 class="text-lg font-semibold text-white mb-4">Income vs Expenses</h3>
                     <canvas id="transactionsChart" class="w-full" height="300"></canvas>
                 </div>
-                <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
                     <h3 class="text-lg font-semibold text-white mb-4">Wallet Distribution</h3>
                     <canvas id="walletsChart" class="w-full" height="300"></canvas>
                 </div>
             </div>
 
             {{-- Recent Transactions --}}
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 overflow-hidden">
                 <div class="p-6 border-b border-gray-700">
                     <h3 class="text-lg font-semibold text-white">Recent Transactions</h3>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-700">
-                        <thead class="bg-gray-700/50">
+                    <table class="min-w-full divide-y divide-white/10">
+                        <thead class="divide-white/10">
                             <tr>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
@@ -135,7 +135,7 @@
                                     Type</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-gray-800 divide-y divide-gray-700">
+                        <tbody class="divide-white/10 divide-y divide-gray-700">
                             @foreach ($transactions as $transaction)
                                 <tr class="hover:bg-gray-700/50 transition-colors">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
