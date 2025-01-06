@@ -38,12 +38,9 @@ class TransactionController extends Controller
         try {
             DB::beginTransaction();
 
-            $transactionDate1 = Carbon::parse($request->tx_date)->startOfDay();
-            $transactionDate = $request->tx_date;
+            $transactionDate = Carbon::parse($request->tx_date)->startOfDay()->toDateString();
             $validated['user_id'] = Auth::id();
-
-            // dd($transactionDate1 . ' ' . $transactionDate);
-
+            $validated['tx_date'] = $transactionDate;
 
             switch ($request->type) {
                 case 'income': // Tambah Saldo
@@ -57,7 +54,7 @@ class TransactionController extends Controller
                         'wallet_id' => $wallet->id,
                         'category_id' => $request->category_id,
                         'description' => $request->description,
-                        'tx_date' => $transactionDate,
+                        'tx_date' => $validated['tx_date'],
                         'user_id' => $validated['user_id'],
                     ]);
                     break;
@@ -78,12 +75,12 @@ class TransactionController extends Controller
                         'wallet_id' => $wallet->id,
                         'category_id' => $request->category_id,
                         'description' => $request->description,
-                        'tx_date' => $transactionDate,
+                        'tx_date' => $validated['tx_date'],
                         'user_id' => $validated['user_id'],
                     ]);
                     break;
 
-                case 'transfer': // Transfer Antar Wallet
+                case 'transfer': // Transfer
                     $fromWallet = Wallet::findOrFail($request->wallet_id);
                     $toWallet = Wallet::findOrFail($request->to_wallet_id);
 
@@ -104,7 +101,7 @@ class TransactionController extends Controller
                         'wallet_id' => $fromWallet->id,
                         'category_id' => $request->category_id,
                         'description' => 'Transfer ke ' . $toWallet->name,
-                        'tx_date' => $transactionDate,
+                        'tx_date' => $validated['tx_date'],
                         'user_id' => $validated['user_id'],
                     ]);
 
@@ -115,12 +112,13 @@ class TransactionController extends Controller
                         'wallet_id' => $toWallet->id,
                         'category_id' => $request->category_id,
                         'description' => 'Transfer dari ' . $fromWallet->name,
-                        'tx_date' => $transactionDate,
+                        'tx_date' => $validated['tx_date'],
                         'user_id' => $validated['user_id'],
                     ]);
                     break;
             }
 
+            // dd($validated);
             DB::commit();
             return redirect()->route('transactions.index')->with('success', 'Transaksi berhasil ditambahkan.');
         } catch (\Exception $e) {
@@ -128,6 +126,7 @@ class TransactionController extends Controller
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
     public function edit(Transaction $transaction)
     {
         // Menampilkan form edit transaksi

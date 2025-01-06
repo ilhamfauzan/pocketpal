@@ -19,6 +19,7 @@ class Transaction extends Model
         'created_at',
         'updated_at',
         'user_id',
+        'tx_date',
     ];
 
     /**
