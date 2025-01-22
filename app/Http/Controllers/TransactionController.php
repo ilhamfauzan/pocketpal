@@ -15,7 +15,7 @@ class TransactionController extends Controller
     public function index()
     {
         // Ambil semua wallet untuk dropdown dan transaksi untuk daftar
-        $wallets = Wallet::all();
+        $wallets = Auth::user()->wallets;
         $categories = Category::all();
         $transactions = Transaction::with('wallet', 'category')->latest()->get();
 
