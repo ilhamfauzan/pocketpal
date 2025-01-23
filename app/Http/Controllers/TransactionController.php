@@ -96,22 +96,22 @@ class TransactionController extends Controller
 
                     // Simpan transaksi transfer (pengeluaran dari wallet asal)
                     Transaction::create([
-                        'type' => 'expense',
+                        'type' => 'transfer',
                         'amount' => $request->amount,
                         'wallet_id' => $fromWallet->id,
                         'category_id' => $request->category_id,
-                        'description' => 'Transfer ke ' . $toWallet->name,
+                        'description' => 'Transfer ' . $fromWallet->name . 'to ' . $toWallet->name,
                         'tx_date' => $validated['tx_date'],
                         'user_id' => $validated['user_id'],
                     ]);
 
                     // Simpan transaksi transfer (pemasukan ke wallet tujuan)
                     Transaction::create([
-                        'type' => 'income',
+                        'type' => 'transfer',
                         'amount' => $request->amount,
                         'wallet_id' => $toWallet->id,
                         'category_id' => $request->category_id,
-                        'description' => 'Transfer dari ' . $fromWallet->name,
+                        'description' => 'Transfer from ' . $fromWallet->name,
                         'tx_date' => $validated['tx_date'],
                         'user_id' => $validated['user_id'],
                     ]);

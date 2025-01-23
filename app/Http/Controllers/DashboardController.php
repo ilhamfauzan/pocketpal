@@ -32,11 +32,13 @@ class DashboardController extends Controller
         // Ambil data income dan expense bulan ini
         $incomeThisMonth = Transaction::where('user_id', $userId)
             ->where('type', 'income')
+            ->where('type', '!=', 'transfer')
             ->whereMonth('tx_date', Carbon::now()->month)
             ->sum('amount');
 
         $expenseThisMonth = Transaction::where('user_id', $userId)
             ->where('type', 'expense')
+            ->where('type', '!=', 'transfer')
             ->whereMonth('tx_date', Carbon::now()->month)
             ->sum('amount');
 

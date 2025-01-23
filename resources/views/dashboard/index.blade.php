@@ -102,11 +102,6 @@
 
             {{-- Charts Section --}}
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
-                <div class="lg:col-span-1 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
-                    <h3 class="text-lg font-semibold text-white mb-0">Income vs Expenses</h3>
-                    <p class="text-s font-semibold text-white/50 mb-5">this month</p>
-                    <canvas id="transactionsChart" class="w-full" height="300"></canvas>
-                </div>
                 @if ($wallets->isEmpty())
                 <div class="lg:col-span-1 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
                     <h3 class="text-lg font-semibold text-white mb-4">Wallet Distribution</h3>
@@ -120,6 +115,11 @@
                         <canvas id="walletsChart" class="w-full" height="300"></canvas>
                     </div>
                 @endif
+                <div class="lg:col-span-1 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-white mb-0">Income vs Expenses</h3>
+                    <p class="text-s font-semibold text-white/50 mb-5">this month</p>
+                    <canvas id="transactionsChart" class="w-full" height="300"></canvas>
+                </div>
                 <div class="lg:col-span-2 bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl sm:rounded-lg border border-gray-700 overflow-hidden">
                     <div class="p-6 border-b border-gray-700">
                         <h3 class="text-lg font-semibold text-white">Recent Transactions</h3>
@@ -160,13 +160,13 @@
                                         </td>
                                         <td
                                             class="px-6 py-4 text-sm font-medium
-                                            {{ $transaction->type === 'income' ? 'text-emerald-400' : 'text-rose-400' }}">
+                                            {{ $transaction->type === 'income' ? 'text-emerald-400' : ($transaction->type === 'expense' ? 'text-rose-400' : 'text-yellow-400') }}">
                                             Rp{{ number_format($transaction->amount, 2) }}
                                         </td>
                                         <td class="px-6 py-4">
                                             <span
                                                 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                                {{ $transaction->type === 'income' ? 'bg-emerald-900/50 text-emerald-200' : 'bg-rose-900/50 text-rose-200' }}">
+                                                {{ $transaction->type === 'income' ? 'bg-emerald-900/50 text-emerald-200' : ($transaction->type === 'expense' ? 'bg-rose-900/50 text-rose-200' : 'bg-yellow-900/50 text-yellow-200') }}">
                                                 {{ ucfirst($transaction->type) }}
                                             </span>
                                         </td>
