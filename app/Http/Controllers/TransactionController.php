@@ -123,7 +123,7 @@ class TransactionController extends Controller
             return redirect()->route('transactions.index')->with('success', 'Transaksi berhasil ditambahkan.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => $e->getMessage()]);
+            return back()->withErrors(['success' => $e->getMessage()]);
         }
     }
 

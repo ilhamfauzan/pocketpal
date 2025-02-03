@@ -29,6 +29,7 @@ class WalletController extends Controller
             'name' => 'required|string|max:255',
             'balance' => 'required|numeric|min:0',
             'emoji' => 'required|string|max:1',
+            'color_hex' => 'required',
         ]);
 
 
